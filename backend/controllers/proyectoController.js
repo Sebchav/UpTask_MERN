@@ -24,10 +24,13 @@ const obtenerProyecto = async(req, res)=>{
     
     if(mongoose.Types.ObjectId.isValid(id)){
       proyecto = await Proyecto.findById(id);
-    } else { 
+    } 
+    
+    if(!proyecto){ 
       const error = new Error('El proyecto no fue encontrado');
       return res.status(404).json({ msg: error.message});
     }
+
     if(proyecto.creador.toString() !== req.usuario._id.toString()){
       const error = new Error('Acción no valida');
       return res.status(401).json({msg: error.message})
