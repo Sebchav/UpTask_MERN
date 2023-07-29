@@ -22,12 +22,8 @@ const FormularioProyecto = () => {
             setDescripcion(proyecto.descripcion);
             setFechaEntrega(proyecto.fechaEntrega?.split("T")[0]);
             setCliente(proyecto.cliente);
-        }else{
-
         }
     }, [params])
-
-    
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -41,8 +37,9 @@ const FormularioProyecto = () => {
         }
 
         // Pasar los datos hacia el provider
-        await submitProyecto({ nombre, descripcion, fechaEntrega, cliente});
+        await submitProyecto({ id, nombre, descripcion, fechaEntrega, cliente});
 
+        setId(null);
         setNombre("");
         setDescripcion("");
         setCliente("");
